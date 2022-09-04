@@ -45,7 +45,7 @@ exports.config = {
     
     connectionRetryCount: 3,
    
-    services: ['selenium-standalone',  'edgedriver'],
+    services: ['selenium-standalone'],
     
     
     framework: 'mocha',

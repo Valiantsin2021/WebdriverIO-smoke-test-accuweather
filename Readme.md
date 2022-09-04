@@ -5,4 +5,3 @@
 ## Screenshot with timestamp on failure
 ## Test suite added to config file
 ## Block the popup and notifications option for Chrome added
-## Add yml file for Github Actions

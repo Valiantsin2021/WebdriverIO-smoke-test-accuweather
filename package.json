@@ -17,12 +17,15 @@
         "@wdio/cli": "^7.24.0",
         "@wdio/local-runner": "^7.24.0",
         "@wdio/mocha-framework": "^7.24.0",
+        "@wdio/sauce-service": "^7.24.0",
         "@wdio/selenium-standalone-service": "^7.24.0",
         "@wdio/spec-reporter": "^7.24.0",
         "allure-commandline": "^2.18.1",
+        "chai-webdriverio": "^1.0.0",
         "chromedriver": "^105.0.0",
         "rimraf": "^3.0.2",
         "wdio-chromedriver-service": "^7.3.2",
-        "wdio-edgedriver-service": "^1.2.0"
+        "wdio-edgedriver-service": "^1.2.0",
+        "wdio-intercept-service": "^4.2.2"
     }
 }

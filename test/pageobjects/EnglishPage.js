@@ -55,7 +55,13 @@ class EnglishPage extends BasePage {
    }
    get dismissBtn() {
     return $('svg[fill="#5F6368"]')
-}
+    }
+    get resultsContainer() {
+        return $('div.locations-list')
+    }
+    get resultsList() {
+        return this.resultsContainer.$$('a')
+    }
     async open(){
         await super.open('/en');
     }
@@ -63,29 +69,23 @@ class EnglishPage extends BasePage {
         await super.maximize();
     }
     async manageCookies() {
-        await this.cookiesBtn.waitForDisplayed({timeout: 2000});
-        await this.cookiesBtn.click();
+        await this.cookiesBtn.waitAndClick();
     }
     async clickSideMenu() {
-        await this.sideMenuBtn.waitForDisplayed();
-        await this.sideMenuBtn.click();
+        await this.sideMenuBtn.waitAndClick();
     }
     async openSettings() {
-        await this.elementSettingsMenu[0].waitForDisplayed();
-        await this.elementSettingsMenu[0].click();
+        await this.elementSettingsMenu[0].waitAndClick();
     }
     async changeLanguage() {
-        await this.localeList.waitForExist();
-        await this.localeList.click();
-        await this.spanish.waitForDisplayed();
-        await this.spanish.click();
+        await this.localeList.waitAndClick();
+        await this.spanish.waitAndClick();
     }
     async searchMalaga() {
         await this.searchInput.waitForDisplayed();
         await this.searchInput.setValue(city);
         await browser.keys('Enter');
-        await this.malaga.waitForDisplayed();
-        await this.malaga.click();
+        await this.malaga.waitAndClick();
     }
 
     async dismissAdd() {
@@ -93,8 +93,7 @@ class EnglishPage extends BasePage {
         if(await this.adIframe.isExisting()) {
             await this.adIframe.waitForExist();
             await browser.switchToFrame(await this.adIframe);
-            await this.dismissBtn.waitForDisplayed();
-            await this.dismissBtn.click();
+            await this.dismissBtn.waitAndClick();
         }
         return
     }    
@@ -103,8 +102,7 @@ class EnglishPage extends BasePage {
         if(await this.frame.isExisting()) {
             await this.frame.waitForExist();
             await browser.switchToFrame(await this.frame);
-            await this.dismissBtn.waitForDisplayed();
-            await this.dismissBtn.click();
+            await this.dismissBtn.waitAndClick();
         }
         return
     }

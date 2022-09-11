@@ -1,6 +1,7 @@
 const EnglishPage = require('../pageobjects/EnglishPage');
 const { titleEn, titleEs, titleEsSettings, cookiesBtnEn, cookiesBtnEs, sideMenuHref, settingsHref } = require('../pageobjects/utils/constants')
 const SpanishPage = require('../pageobjects/SpanishPage');
+const expectChai = require('chai').expect;
 
 describe('Opens weather.com and searches Malaga weather', async () => {
     it('checks page title in Spanish', async () => {
@@ -50,4 +51,19 @@ describe('Opens weather.com and searches Malaga weather', async () => {
         const headerTemp = await EnglishPage.tempHeader.getText()
         await expect(EnglishPage.temperature).toHaveTextContaining(headerTemp.slice(0, 3))    
     }); 
+    it('should verify results of the search', async () => {
+        await EnglishPage.open();
+        await EnglishPage.dismissAdd();
+        await EnglishPage.dismissAdd1();
+        await EnglishPage.searchInput.setValue('Malaga');
+        await EnglishPage.searchBtn.click();
+        await expect(EnglishPage.resultsList[0]).toHaveTextContaining('Malaga, Andalusia');
+        await expect(EnglishPage.resultsList[1]).toHaveTextContaining('Malaga, Santander');
+        await expect(EnglishPage.resultsList[2]).toHaveTextContaining('Malaga, Madang');
+        await expect(EnglishPage.resultsList[3]).toHaveTextContaining('Malaga, Western Australia');
+        await expect(EnglishPage.resultsList[4]).toHaveTextContaining('Malaga, Negros Oriental');
+    })
+    it('should check the input field is empty after the search query', async() => {
+        expectChai(await EnglishPage.searchInput.getValue()).to.eq('')
+    })
 });

@@ -1,6 +1,19 @@
 const allure = require('allure-commandline');
 
 exports.config = {
+    
+    
+    user: 'oauth-lutchenkovalentin-6398a',
+    key: 'b6290348-20c3-484f-98a4-303629fd688a',
+    region: 'eu', // or 'eu' or 'apac'
+    services: [ 'selenium-standalone',
+        ['sauce', {
+            sauceConnect: true,
+            sauceConnectOpts: {
+                // ...
+            }
+        }]
+    ],
     specs: [
         './test/specs/**/*.js'
     ],
@@ -23,7 +36,7 @@ exports.config = {
                 'profile.managed_default_content_settings.popups' : 2,
                 'profile.managed_default_content_settings.notifications' : 2,
             }
-        }
+        },
         },
         {
         maxInstances: 1,
@@ -45,7 +58,7 @@ exports.config = {
     
     connectionRetryCount: 3,
    
-    services: ['selenium-standalone'],
+    services: ['selenium-standalone', 'intercept'],
     
     
     framework: 'mocha',
@@ -77,6 +90,7 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      */
     // onPrepare: function (config, capabilities) {
+    //     console.log('hi')
     // },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
@@ -88,6 +102,7 @@ exports.config = {
      * @param  {[type]} execArgv list of string arguments passed to the worker process
      */
     // onWorkerStart: function (cid, caps, specs, args, execArgv) {
+    //     console.log('hi')
     // },
     /**
      * Gets executed just after a worker process has exited.
@@ -128,20 +143,26 @@ exports.config = {
      * Hook that gets executed before the suite starts
      * @param {Object} suite suite details
      */
-    // beforeSuite: function (suite) {
-    // },
+    beforeSuite: function (suite) {
+        browser.addCommand("waitAndClick", async function () {
+            await this.waitForDisplayed()
+            await this.click()
+        }, true)
+    },
     /**
      * Function to be executed before a test (in Mocha/Jasmine) starts.
      */
     //  beforeTest: function () {
     //     const chai = require('chai')
-    //     const chaiWebdriver = require('chai-webdriverio').default
+    //     const expectChai = require('chai').expect;
 
-    //     chai.use(chaiWebdriver(browser))
+        // const chaiWebdriver = require('chai-webdriverio').default
 
-    //     global.assert = chai.assert
-    //     global.expect = chai.expect
-    //     global.should = chai.should
+        // chai.use(chaiWebdriver(browser))
+
+        // global.assert = chai.assert
+        // global.expect = chai.expect
+        // global.should = chai.should
     // },
     /**
      * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling

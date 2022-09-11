@@ -6,8 +6,11 @@
     "scripts": {
         "test": "npm run clean && npm run wdio",
         "smoke": "npm run clean && npm run wdio --smoke",
+        "smoke-headless": "npm run clean && npm run wdio-headless --smoke",
         "clean": "rimraf allure-report && rimraf allure-results && rimraf screenshots/errors/*",
-        "wdio": "wdio run wdio.conf.js"
+        "wdio": "wdio run wdio.conf.js",
+        "wdio-headless": "wdio run wdio-github.conf.js"
+
     },
     "keywords": [],
     "author": "Valiantsin Lutchanka",
